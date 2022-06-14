@@ -7,6 +7,8 @@ RUN apt-get upgrade -y
 RUN apt install -y python3-psycopg2
 RUN apt install -y python3-pip
 RUN apt install -y wget
+RUN apt install -y unzip
+RUN apt install -y xvfb
 
 # installing robotframework and libraries
 RUN pip3 install robotframework
@@ -33,4 +35,19 @@ RUN rm google-chrome-stable_current_amd64.deb -R
 
 # creatig user for running tests
 RUN adduser --disabled-password --gecos '' parrot
-RUN ls -Al /home/harrier
+
+# dowloading and extracting drivers
+RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.31.0/geckodriver-v0.31.0-linux64.tar.gz
+RUN wget https://chromedriver.storage.googleapis.com/103.0.5060.24/chromedriver_linux64.zip
+RUN tar -xvf geckodriver-v0.31.0-linux64.tar.gz -C /home/parrot
+RUN unzip chromedriver_linux64.zip -d /home/parrot
+
+# moving drivers to global dir
+RUN mv /home/parrot/geckodriver /usr/local/bin && mv /home/parrot/chromedriver /usr/local/bin
+
+# removing donwloaded files
+RUN rm geckodriver-v0.31.0-linux64.tar.gz && rm chromedriver_linux64.zip
+RUN ls /home/parrot -Al
+CMD mitmdump &
+RUN ls /home/parrot -Al
+RUN ls -Al
