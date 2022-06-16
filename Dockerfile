@@ -1,22 +1,21 @@
 FROM ubuntu:22.04
 # updating system
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 # installing necessary apps
-RUN apt install -y python3-psycopg2
-RUN apt install -y python3-pip
-RUN apt install -y wget
-RUN apt install -y unzip
-RUN apt install -y xvfb
+RUN apt install -y python3-psycopg2 \
+    python3-pip \
+    wget \
+    unzip \
+    xvfb 
 
 # installing robotframework and libraries
-RUN pip3 install robotframework
-RUN pip3 install robotframework-seleniumLibrary
-RUN pip3 install robotframework-databaseLibrary
-RUN pip3 install robotframework-requests
-RUN pip3 install robotframework-sikuliLibrary
-RUN pip3 install robotframework-rpa
+RUN pip3 install robotframework \
+    robotframework-seleniumLibrary \
+    robotframework-databaseLibrary \
+    robotframework-requests \ 
+    robotframework-sikuliLibrary \ 
+    robotframework-rpa
 
 # installing mitmproxy
 RUN pip3 install mitmproxy
@@ -47,7 +46,3 @@ RUN mv /home/parrot/geckodriver /usr/local/bin && mv /home/parrot/chromedriver /
 
 # removing donwloaded files
 RUN rm geckodriver-v0.31.0-linux64.tar.gz && rm chromedriver_linux64.zip
-RUN ls /home/parrot -Al
-CMD mitmdump &
-RUN ls /home/parrot -Al
-RUN ls -Al
