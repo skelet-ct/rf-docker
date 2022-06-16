@@ -1,19 +1,24 @@
-# docker
-***rf-docker***
+# rf-docker
+
 dockerfile for robotframework test execution
-installed robotframework libraries:
+
+***installed robotframework libraries:***
+
     - robotframework-seleniumLibrary
     - robotframework-databaseLibrary
     - robotframework-requests
     - robotframework-sikuliLibrary
     - robotframework-rpa
 
-other pip applications:
+***other pip applications:***
+
     - mitmproxy
 
-db driver:
+***db driver:***
+    
     - psycopq2
 
-browsers: 
+***browsers: ***
+    
     - firefox
     - google-chrome
