@@ -18,7 +18,7 @@ dockerfile for robotframework test execution
     
     - psycopq2
 
-***browsers: ***
+***browsers:***
     
     - firefox
     - google-chrome
