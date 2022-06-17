@@ -20,5 +20,4 @@ dockerfile for robotframework test execution
 
 ***browsers:***
     
-    - firefox
     - google-chrome

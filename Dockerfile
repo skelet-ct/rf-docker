@@ -1,34 +1,41 @@
 FROM ubuntu:22.04
-# updating system
+
+# Updating system
 RUN apt-get update && apt-get upgrade -y
 
-# installing necessary apps
-RUN apt install -y python3-psycopg2
-RUN apt install -y python3-pip
-RUN apt install -y wget
-RUN apt install -y unzip
-RUN apt install -y xvfb 
+# Installiong essential packages
+RUN apt install -y python3-psycopg2 \
+	python3-pip \
+	python3-venv \
+	wget \
+	unzip \
+	xvfb 
 
+# Create the user
 ARG USERNAME=parrot
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME 
+RUN groupadd --gid ${USER_GID} ${USERNAME} \
+    && useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME}
 
 USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+
+ENV	PATH=/home/parrot/.local/bin:${PATH}
 
 # installing robotframework and libraries
-RUN pip3 install robotframework
-RUN pip3 install robotframework-seleniumLibrary
-RUN pip3 install robotframework-databaseLibrary
-RUN pip3 install robotframework-requests
-RUN pip3 install robotframework-sikuliLibrary
-RUN pip3 install robotframework-rpa
-
+RUN pip3 install robotframework \
+	robotframework-seleniumLibrary \
+	robotframework-databaseLibrary \
+	robotframework-requests \
+	robotframework-sikuliLibrary \
+	robotframework-rpa 
+	
+RUN pip3 install pipx
+	
 # installing mitmproxy
-RUN pip3 install mitmproxy
+RUN pipx install mitmproxy
 
 USER root
 
@@ -42,7 +49,7 @@ RUN apt install -y ./google-chrome-stable_current_amd64.deb
 RUN rm google-chrome-stable_current_amd64.deb -R
 
 # dowloading and extracting drivers
-RUN wget https://chromedriver.storage.googleapis.com/103.0.5060.24/chromedriver_linux64.zip
+RUN wget https://chromedriver.storage.googleapis.com/102.0.5005.61/chromedriver_linux64.zip
 RUN unzip chromedriver_linux64.zip -d /home/parrot
 
 # moving drivers to global dir
@@ -50,8 +57,3 @@ RUN mv /home/parrot/chromedriver /usr/local/bin
 
 # removing donwloaded files
 RUN rm chromedriver_linux64.zip
-
-CMD export PATH=/home/parrot/.local/bin:$PATH \
-    && ln -s ~/.local/bin/robot /usr/bin/robot 
-
-WORKDIR /home/${USERNAME}
