@@ -21,3 +21,14 @@ dockerfile for robotframework test execution
 ***browsers:***
     
     - google-chrome
+
+
+*** required ENV varialles ***
+DB_NAME
+DB_USER
+DB_PASSWORD
+DB_HOST
+DB_PORT
+CI_PROJECT_NAME
+VPN_USER
+VPN_PASS
