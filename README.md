@@ -10,11 +10,11 @@ dockerfile for robotframework test execution
     - robotframework-sikuliLibrary
     - robotframework-rpa
     - robocorp-dialog
-	- robotframework-assertion-engine
-	- robotframework-browser
-	- robotframework-pythonlibcore
+	  - robotframework-assertion-engine
+	  - robotframework-browser
+	  - robotframework-pythonlibcore
     - robotframework-seleniumtestability
-	- psycopg2-binary
+	  - psycopg2-binary
 	
 
 ***other pip applications:***
@@ -28,13 +28,3 @@ dockerfile for robotframework test execution
 ***browsers:***
     
     - google-chrome
-
-***required ENV varialles***
-    - DB_NAME
-    - DB_USER
-    - DB_PASSWORD
-    - DB_HOST
-    - DB_PORT
-    - CI_PROJECT_NAME
-    - VPN_USER
-    - VPN_PASS
