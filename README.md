@@ -30,6 +30,7 @@ dockerfile for robotframework test execution
     - google-chrome
 
 ***required ENV varialles***
+
     - DB_NAME
     - DB_USER
     - DB_PASSWORD
